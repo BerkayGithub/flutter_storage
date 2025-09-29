@@ -6,7 +6,7 @@ A new Flutter project about storing data using Shared Preferences and database.
 
 This project is a starting point for a Flutter application.
 
-# SharedPreferences
+## SharedPreferences
 
 dependencies:
   shared_preferences: ^2.5.3
