@@ -3,16 +3,17 @@ import 'package:flutter_storage/services/local_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesService implements LocalStorageServices{
+  @override
   Future<void> verileriKaydet(UserInformation userInformation) async{
     final preferences = await SharedPreferences.getInstance();
     final name = userInformation.isim;
-
     preferences.setString('isim', name);
     preferences.setBool('ogrenci', userInformation.ogrenciMi);
     preferences.setInt('cinsiyet', userInformation.cinsiyet.index);
     preferences.setStringList('renkler', userInformation.renkler);
   }
 
+  @override
   Future<UserInformation> verileriOku() async{
     final preferences = await SharedPreferences.getInstance();
     var _isim = preferences.getString('isim') ?? '';

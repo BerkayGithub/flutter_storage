@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_storage/main.dart';
 import 'package:flutter_storage/model/my_models.dart';
 import 'package:flutter_storage/services/file_storage.dart';
 import 'package:flutter_storage/services/local_storage.dart';
+import 'package:flutter_storage/services/secure_storage.dart';
 
 class SharedPreferencesKullanimi extends StatefulWidget {
   const SharedPreferencesKullanimi({super.key});
@@ -17,7 +19,7 @@ class _SharedPreferencesKullanimiState
   var _secilenRenkler = <String>[];
   var _ogrenciMisin = false;
   final TextEditingController _nameController = TextEditingController();
-  LocalStorageServices _preferencesService = FileStorageService();
+  LocalStorageServices _preferencesService = locator<LocalStorageServices>();
   late UserInformation _userInformation;
 
   @override

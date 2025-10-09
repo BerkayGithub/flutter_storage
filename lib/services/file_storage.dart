@@ -22,11 +22,13 @@ class FileStorageService implements LocalStorageServices{
     return file;
   }
 
+  @override
   Future<void> verileriKaydet(UserInformation userInformation) async{
     var file = await _createFile();
     await file.writeAsString(jsonEncode(userInformation));
   }
 
+  @override
   Future<UserInformation> verileriOku() async{
     try{
       var file = await _createFile();

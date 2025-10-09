@@ -6,6 +6,11 @@ import '../model/my_models.dart';
 class SecureStorage implements LocalStorageServices{
   late final FlutterSecureStorage secureStorage;
 
+  SecureStorage(){
+    secureStorage = const FlutterSecureStorage();
+  }
+
+  @override
   Future<void> verileriKaydet(UserInformation userInformation) async{
     final name = userInformation.isim;
     await secureStorage.write(key: 'isim', value: name);
@@ -14,8 +19,8 @@ class SecureStorage implements LocalStorageServices{
     await secureStorage.write(key: 'renkler', value: jsonEncode(userInformation.renkler));
   }
 
+  @override
   Future<UserInformation> verileriOku() async{
-    secureStorage = FlutterSecureStorage();
     var _isim = await secureStorage.read(key: 'isim') ?? '';
     var ogrenciMi = await secureStorage.read(key: 'ogrenci') ?? 'false';
     var _ogrenciMi = ogrenciMi.toLowerCase() == 'true' ? true : false;

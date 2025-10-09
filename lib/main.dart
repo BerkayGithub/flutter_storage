@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_storage/services/local_storage.dart';
+import 'package:flutter_storage/services/shared_pref_service.dart';
 import 'package:flutter_storage/shared_preferences_kullanimi.dart';
+import 'package:get_it/get_it.dart';
+
+final locator = GetIt.instance;
+
+void setup() {
+  locator.registerSingleton<LocalStorageServices>(SharedPreferencesService());
+  //locator.registerLazySingleton<LocalStorageServices>(() => SharedPreferencesService());  this one creates the instance when it is needed and not immediately
+}
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  setup();
   runApp(const MyApp());
 }
 
