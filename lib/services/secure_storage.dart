@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_storage/services/local_storage.dart';
 import '../model/my_models.dart';
 
-class SecureStorage{
+class SecureStorage implements LocalStorageServices{
   late final FlutterSecureStorage secureStorage;
 
-  void verileriKaydet(UserInformation userInformation) async{
+  Future<void> verileriKaydet(UserInformation userInformation) async{
     final name = userInformation.isim;
     await secureStorage.write(key: 'isim', value: name);
     await secureStorage.write(key: 'ogrenci', value: userInformation.ogrenciMi.toString());

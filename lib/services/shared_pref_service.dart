@@ -1,8 +1,9 @@
 import 'package:flutter_storage/model/my_models.dart';
+import 'package:flutter_storage/services/local_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPreferencesService{
-  void verileriKaydet(UserInformation userInformation) async{
+class SharedPreferencesService implements LocalStorageServices{
+  Future<void> verileriKaydet(UserInformation userInformation) async{
     final preferences = await SharedPreferences.getInstance();
     final name = userInformation.isim;
 
