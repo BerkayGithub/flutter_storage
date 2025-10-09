@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_storage/model/my_models.dart';
-import 'package:flutter_storage/services/shared_pref_service.dart';
+import 'package:flutter_storage/services/secure_storage.dart';
 
 class SharedPreferencesKullanimi extends StatefulWidget {
   const SharedPreferencesKullanimi({super.key});
@@ -16,7 +16,7 @@ class _SharedPreferencesKullanimiState
   var _secilenRenkler = <String>[];
   var _ogrenciMisin = false;
   final TextEditingController _nameController = TextEditingController();
-  var _preferencesService = SharedPreferencesService();
+  var _preferencesService = SecureStorage();
   late UserInformation _userInformation;
   var dartvariable;
 
