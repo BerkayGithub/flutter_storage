@@ -13,6 +13,20 @@ pubspec.yaml
 	dependencies:
 	  shared_preferences: ^2.5.3
 
+shared_preferences_kullanimi.dart
+
+	void _verileriKaydet() async{
+	    final preferences = await SharedPreferences.getInstance();
+	    final name = _nameController.text;
+	    preferences.setString('isim', name);
+	    preferences.setBool('ogrenci', _ogrenciMisin);
+
+	void _verileriOku() async{
+	    final preferences = await SharedPreferences.getInstance();
+	    _nameController.text = preferences.getString('isim') ?? '';
+	    _ogrenciMisin = preferences.getBool('ogrenci') ?? false;
+	    _secilenCinsiyet = CINSIYET.values[preferences.getInt('cinsiyet') ?? 0];
+
 ## Secure storage
 
 A Flutter plugin that stores data inside the app securely by encrypting it. It uses platform-specific secure storage mechanisms, such as Keystore on Android and Keychain on iOS
@@ -21,6 +35,23 @@ pubspec.yaml
 
 	dependencies:
 	  flutter_secure_storage: ^9.2.4
+
+secure_storage.dart
+
+	class SecureStorage{
+	  late final FlutterSecureStorage secureStorage;
+	
+	  void verileriKaydet(UserInformation userInformation) async{
+	    final name = userInformation.isim;
+	    await secureStorage.write(key: 'isim', value: name);
+	    await secureStorage.write(key: 'ogrenci', value: userInformation.ogrenciMi.toString());
+	
+	  Future<UserInformation> verileriOku() async{
+	    secureStorage = FlutterSecureStorage();
+	    var _isim = await secureStorage.read(key: 'isim') ?? '';
+	    var ogrenciMi = await secureStorage.read(key: 'ogrenci') ?? 'false';
+	    var _ogrenciMi = ogrenciMi.toLowerCase() == 'true' ? true : false;
+	    return UserInformation(_isim, _cinsiyet, _renkler, _ogrenciMi);
 
 ## Path Provider
 
@@ -31,7 +62,7 @@ pubspec.yaml
 	dependencies:
 	  path_provider: ^2.1.5
 
-File storage class
+file_storage.dart
 
 	var filePath = await getApplicationDocumentsDirectory();
 
@@ -52,7 +83,7 @@ pubspec.yaml
 
 	get_it: ^8.2.0
 
-Main class
+main.dart
 
 	final locator = GetIt.instance;
 
@@ -72,6 +103,6 @@ Main class
 		runApp(const MyApp());
 	}
 
-UI class
+shared_preferences_kullanimi.dart
 
 	LocalStorageServices _preferencesService = locator<LocalStorageServices>();
